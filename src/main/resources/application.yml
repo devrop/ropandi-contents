@@ -1,0 +1,28 @@
+spring:  
+  application:
+   name: contents
+  data:
+    mongodb:
+      uri: mongodb://admin:pass1234@ds141621.mlab.com:41621/demodb
+#eureka:
+#  client:
+#    serviceUrl:
+#      #defaultZone: http://localhost:8761/eureka/
+#      defaultZone: https://ropandi-discovery.herokuapp.com/eureka
+#  instance:
+#    statusPageUrlPath: /info
+#    healthCheckUrlPath: /health
+#    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#server:
+#  port: 7899  
+ropandi:
+    key:
+      id-menu: id_menu
+      id-privilege: id_privilege
+    jwtSecret: sewrtnjlbadaydyw
+    jwtExpiration: 864000
+    regex1: //
+    regex2: ;
+key:
+  enc: qwvbhKhtYhnfrtJk
+

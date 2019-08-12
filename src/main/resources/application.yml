@@ -13,16 +13,15 @@ spring:
 #    statusPageUrlPath: /info
 #    healthCheckUrlPath: /health
 #    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-#server:
-#  port: 7899  
+server:
+  port: 7899  
 ropandi:
     key:
       id-menu: id_menu
       id-privilege: id_privilege
     jwtSecret: sewrtnjlbadaydyw
-    jwtExpiration: 864000
+    jwtExpiration: 3600000
     regex1: //
     regex2: ;
-key:
-  enc: qwvbhKhtYhnfrtJk
+    encrypted: R0p4ND1aHmAdCOoL
 

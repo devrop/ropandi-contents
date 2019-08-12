@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,8 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
-
+    @Value("${ropandi.encrypted}")
+	private String keys;
 	@PostMapping("login")
 	public ResponseEntity<BaseModel<List<LoginResponse>>> login(@RequestBody LoginRequest login) {
 		try {
@@ -45,6 +47,20 @@ public class LoginController {
 		String acct = token ==null? "" : token;
 		AccessToken ctg = loginService.getToken(acct);
 		return new ResponseEntity<AccessToken>(ctg,HttpStatus.OK);
+	}
+	
+	@GetMapping("getkey")
+	public ResponseEntity<BaseModel<String>> getKey(){
+		BaseModel<String> result = new BaseModel<String>();
+		try {
+			result.setStatus(Variable.RESPONSEOK);
+			result.setMessage(keys.trim());
+			return new ResponseEntity<BaseModel<String>>(result, HttpStatus.OK);
+		} catch (Exception e) {
+			result.setStatus(Variable.BADRESPONSE);
+			result.setMessage("Error in Controller with message : " + e.getMessage());
+			return new ResponseEntity<BaseModel<String>>(result, HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	

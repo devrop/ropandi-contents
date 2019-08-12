@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -53,19 +54,18 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 		try {
 			response.put(Variable.STATUS, Variable.STATUSOK);
 			//jika ada dia Update
-			boolean isExist = privilegeRepository.findById(privelege.getId()).isPresent();
-			System.out.println("is Exist" + isExist);
-			if(isExist) {
-				
-				privilegeRepository.save(
+			Optional<Privilege> isExist = privilegeRepository.findById(privelege.getId());
+			System.out.println("is Exist" + isExist.isPresent());
+			if(isExist.isPresent()) {
+							privilegeRepository.save(
 						Privilege.newPrivilege(
 								privelege.getId(), 
-								privelege.getPrivilegeName(),
+								privelege.getPrivilegeName().toUpperCase(),
 								privelege.getFlagAdd(),
 						        privelege.getFlagEdit(), 
 						        privelege.getFlagView(), 
 						        privelege.getFlagDelete(),
-						        Utility.convertStringToLocalDate(privelege.getCreatedDate()),
+						        isExist.get().getCreatedDate(),
 						        privelege.getCreatedBy(),
 						        LocalDateTime.now(),
 						        privelege.getUpdatedBy()
@@ -79,7 +79,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 				privilegeRepository.save(
 						Privilege.newPrivilege(
 								uuid, 
-								privelege.getPrivilegeName(),
+								privelege.getPrivilegeName().toUpperCase(),
 								privelege.getFlagAdd(),
 						        privelege.getFlagEdit(), 
 						        privelege.getFlagView(), 
@@ -99,6 +99,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 		} catch (Exception e) {
 			response.put(Variable.STATUS, Variable.STATUSERROR);
 			String message = "Error in service with message : " + e.getMessage();
+			System.out.println("Error " + e.getMessage());
 			response.put(Variable.MESSAGE, message);
 			return response;
 		}

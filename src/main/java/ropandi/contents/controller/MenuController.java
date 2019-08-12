@@ -6,12 +6,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ropandi.contents.model.BaseModel;
@@ -26,7 +26,7 @@ public class MenuController {
 	@Autowired
 	private MenuService menuService;
 	
-	
+	@CrossOrigin
 	@GetMapping("all")
 	public ResponseEntity<BaseModel<List<MenuDto>>> getAllMenus(){
 		 List<MenuDto> listPre = menuService.findAll();
@@ -46,7 +46,7 @@ public class MenuController {
 		 return new  ResponseEntity<BaseModel<List<MenuDto>>>(response,HttpStatus.OK);
 		 
 	}
-	
+	@CrossOrigin
 	@PostMapping("save")
 	public ResponseEntity<BaseModel<String>> saveMenu(@RequestBody MenuDto menuDto){
 		String id = menuDto.getIdMenu() ==null?"save":menuDto.getIdMenu();
@@ -64,9 +64,9 @@ public class MenuController {
 		}
 		return new ResponseEntity<BaseModel<String>>(response,HttpStatus.OK);
 	}
-	
-	@GetMapping("delete")
-	public ResponseEntity<BaseModel<String>> deleteMenu(@RequestParam("id") String id){
+	@CrossOrigin
+	@GetMapping("delete/{id}")
+	public ResponseEntity<BaseModel<String>> deleteMenu(@PathVariable("id") String id){
 		Map<String,String> data = menuService.delete(id);
 		BaseModel<String> response = new BaseModel<String>();
 		response.setStatus(Variable.RESPONSEOK);
@@ -81,8 +81,8 @@ public class MenuController {
 		return new ResponseEntity<BaseModel<String>>(response,HttpStatus.OK);
 		
 	}
-	
-	@GetMapping("privilege/{id}")
+	@CrossOrigin
+	@GetMapping("getone/{id}")
 	public ResponseEntity<BaseModel<List<MenuDto>>> getOneMenu(@PathVariable("id") String id){
 		List<MenuDto> listP = menuService.findById(id);
 		BaseModel<List<MenuDto>> response = new BaseModel<>();
@@ -91,7 +91,6 @@ public class MenuController {
 			 response.setStatus(Variable.BADRESPONSE);
 			 response.setMessage(Variable.MESSAGENOTFOUND);
 			 response.setDataObject("Data empty");
-			 //return new ResponseEntity<ResponseJson>(notFound,HttpStatus.OK);
 		 }else {
 			 response.setStatus(Variable.RESPONSEOK);
 			 response.setMessage(Variable.MESSAGESUCCES);

@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
             			        pri.getFlagDelete()).build();
             }).collect(Collectors.toList());	
 			Optional<UserLogin> userExist = userRepository.findById(login.getId());
-			
+			//System.out.println("password : " + login.getPassword());
 			if(userExist.isPresent()) {
 				userRepository.save(UserLogin.
 	            		newUserLogin(login.getId(), 
@@ -158,6 +158,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		Map<String,String> response = new HashMap<String,String>();
 		try {
+			System.out.println("Id " + id);
 			userRepository.deleteById(id);
 			response.put(Variable.STATUS, Variable.STATUSOK);
 			response.put(Variable.MESSAGE, Variable.SUCCESSDELETE);

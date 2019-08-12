@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ public class PrivilegeController {
 	@Autowired
 	private PrivilegeService prvilegeService;
 	
+	@CrossOrigin
 	@GetMapping("all")
 	public ResponseEntity<BaseModel<List<PrivilegeDto>>> getAllPrivilege(){
 		 List<PrivilegeDto> listPre = prvilegeService.findAll();
@@ -45,7 +47,7 @@ public class PrivilegeController {
 		 return new  ResponseEntity<BaseModel<List<PrivilegeDto>>>(response,HttpStatus.OK);
 		 
 	}
-	
+	@CrossOrigin
 	@PostMapping("save")
 	public ResponseEntity<BaseModel<String>> save(@RequestBody PrivilegeDto privilege){
 		String id = privilege.getId() ==null?"save":privilege.getId();
@@ -64,8 +66,9 @@ public class PrivilegeController {
 		return new ResponseEntity<BaseModel<String>>(response,HttpStatus.OK);
 	}
 	
-	@GetMapping("delete")
-	public ResponseEntity<BaseModel<String>> deletePrivilege(@RequestParam("id") String id){
+	@CrossOrigin
+	@GetMapping("delete/{id}")
+	public ResponseEntity<BaseModel<String>> deletePrivilege(@PathVariable("id") String id){
 		Map<String,String> data = prvilegeService.deletePrivilege(id);
 		BaseModel<String> response = new BaseModel<String>();
 		response.setStatus(Variable.RESPONSEOK);
@@ -80,7 +83,7 @@ public class PrivilegeController {
 		return new ResponseEntity<BaseModel<String>>(response,HttpStatus.OK);
 		
 	}
-	
+	@CrossOrigin
 	@GetMapping("getone/{id}")
 	public ResponseEntity<BaseModel<List<PrivilegeDto>>> getOnePrivilege(@PathVariable("id") String id){
 		List<PrivilegeDto> listP = prvilegeService.findById(id);

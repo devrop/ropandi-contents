@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -45,16 +46,16 @@ public class MenuServiceImpl implements MenuService {
 		try {
 			response.put(Variable.STATUS, Variable.STATUSOK);
 			//jika ada dia Update
-			boolean isExist = menuRepository.findById(menu.getIdMenu()).isPresent();
+			Optional<Menu>  isExist = menuRepository.findById(menu.getIdMenu());
 			//exist update
-			if(isExist) {
+			if(isExist.isPresent()) {
 				menuRepository.save(
 						Menu.newMenu(
 								menu.getIdMenu(), 
 								menu.getMenuName(), 
 								menu.getLink(), 
 								menu.getStatus(),
-								Utility.convertStringToLocalDate(menu.getCreatedDate()),
+								isExist.get().getCreatedDate(),
 								menu.getCreatedBy(),
 								LocalDateTime.now(),
 								menu.getUpdatedBy()

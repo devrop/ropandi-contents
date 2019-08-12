@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // -- swagger ui
 			"/notauth",
 			"/auth/**",
+			"/auth/getkey/**",
 			"/auth",
 		//	"/user",
 		//	"/user/**",

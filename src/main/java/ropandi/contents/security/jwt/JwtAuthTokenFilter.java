@@ -32,11 +32,12 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
 		// TODO Auto-generated method stub
 		 try {
 	        	
+			   
 	            String jwt = getJwt(request);
-	            System.out.println("===================================================================================");
-	            System.out.println("jwt " + jwt);
-	            System.out.println("===================================================================================");
-	            
+//	            System.out.println("===================================================================================");
+//	            System.out.println("jwt " + jwt);
+//	            System.out.println("===================================================================================");
+//	            
 	            if (jwt!=null && tokenProvider.validateJwtToken(jwt)) {
 	                String username = tokenProvider.getBodyTokenFromJwtToken(jwt);
 	                
@@ -57,8 +58,8 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
 	}
 	 private String getJwt(HttpServletRequest request) {
 	        String authHeader = request.getHeader("Authorization");
-	        System.out.println("============================================");
-	        System.out.println("auth header" + authHeader);
+//	        System.out.println("============================================");
+//	        System.out.println("auth header" + authHeader);
 	        if (authHeader != null && authHeader.startsWith("Bearer ")) {
 	        	return authHeader.replace("Bearer ","");
 	        }

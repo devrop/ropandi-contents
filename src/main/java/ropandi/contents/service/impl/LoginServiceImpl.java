@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
     @Value("${ropandi.jwtSecret}")
 	private String jwtSecret;
 
-    @Value("${key.enc}")
+    @Value("${ropandi.encrypted}")
 	private String key;
 	@Value("${ropandi.regex1}")
     private String regex1;
@@ -67,14 +67,10 @@ public class LoginServiceImpl implements LoginService {
 					//generateToken
 					List<String> roleString = us.getRoles().stream().map(s-> s.getRoleName()).collect(Collectors.toList());
 					String bodyToken = Utility.buildingBodyTokenUsernameAndRole(us.getUsername(), regex1, roleString, regex2);
-					//StringBuffer token = new StringBuffer("Bearer ");
-					System.out.println("bodyToken " + bodyToken);
 					String token = jwtProvider.generateJwtTokenCustom(bodyToken);
 				    log.setToken(token);
-				    //System.out.println("Masuk sini?" );
 				    return log;
 				}).collect(Collectors.toList());
-				//System.out.println("size list user " + listUser.size());
 				result.setMessage(Variable.MESSAGESUCCES);
 				result.setDatasEntity(listUser);
 			}else {

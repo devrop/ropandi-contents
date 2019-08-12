@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -47,15 +48,16 @@ public class RoleServiceImpl implements RoleService{
 		try {
 			response.put(Variable.STATUS, Variable.STATUSOK);
 			//jika ada dia Update
-			boolean isExist = roleRepository.findById(role.getIdRole()).isPresent();
+			Optional<Role> isExist = roleRepository.findById(role.getIdRole());
 			//exist update
-			if(isExist) {
+			if(isExist.isPresent()) {
+				//System.out.println("Masuk Sini update");
 				roleRepository.save(
 						Role.newRole(
 								role.getIdRole(), 
-								role.getRoleName(), 
-								Utility.convertStringToLocalDate(role.getCreatedDate()), 
-								role.getCreatedBy(), 
+								role.getRoleName().toUpperCase(), 
+								isExist.get().getCreatedDate(), 
+								isExist.get().getCreatedBy(), 
 								LocalDateTime.now(), 
 								role.getUpdatedBy()
 								).build()

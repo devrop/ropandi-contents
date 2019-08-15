@@ -13,8 +13,8 @@ spring:
 #    statusPageUrlPath: /info
 #    healthCheckUrlPath: /health
 #    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-server:
-  port: 7899  
+#server:
+#  port: 7899  
 ropandi:
     key:
       id-menu: id_menu

@@ -49,12 +49,19 @@ public class LoginController {
 		return new ResponseEntity<AccessToken>(ctg,HttpStatus.OK);
 	}
 	
-	@GetMapping("getkey")
-	public ResponseEntity<BaseModel<String>> getKey(){
+	@PostMapping("getkey")
+	public ResponseEntity<BaseModel<String>> getKey(@RequestBody AccessToken token){
 		BaseModel<String> result = new BaseModel<String>();
+		System.out.println("   mmm " + token.getToken());
+		final String code = token.getToken() ==null? "": token.getToken();
 		try {
+			if(code.equalsIgnoreCase("ropandi")) {
+				result.setMessage(keys.trim());
+			}else {
+				  result.setMessage("");
+			}
 			result.setStatus(Variable.RESPONSEOK);
-			result.setMessage(keys.trim());
+
 			return new ResponseEntity<BaseModel<String>>(result, HttpStatus.OK);
 		} catch (Exception e) {
 			result.setStatus(Variable.BADRESPONSE);

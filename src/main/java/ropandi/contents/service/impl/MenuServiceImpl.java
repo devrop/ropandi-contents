@@ -34,6 +34,7 @@ public class MenuServiceImpl implements MenuService {
 			dto.setMenuName(m.getMenuName());
 			dto.setStatus(m.getStatus());
 			dto.setLink(m.getLink());
+			dto.setCategoryCode(m.getCategoryCode());
 			return dto;
 		}).collect(Collectors.toList());
 		
@@ -58,7 +59,8 @@ public class MenuServiceImpl implements MenuService {
 								isExist.get().getCreatedDate(),
 								menu.getCreatedBy(),
 								LocalDateTime.now(),
-								menu.getUpdatedBy()
+								menu.getUpdatedBy(),
+								menu.getCategoryCode()
 								).build()
 						);
 				response.put(Variable.MESSAGE, Variable.SUCCESSUPDATED);
@@ -73,7 +75,8 @@ public class MenuServiceImpl implements MenuService {
 								LocalDateTime.now(),
 								menu.getCreatedBy(),
 								LocalDateTime.now(),
-								""
+								"",
+								menu.getCategoryCode()
 								).build()
 						);
 				response.put(Variable.MESSAGE, Variable.SUCCESSSAVE);
@@ -114,6 +117,7 @@ public class MenuServiceImpl implements MenuService {
 			dto.setMenuName(m.getMenuName());
 			dto.setStatus(m.getStatus());
 			dto.setLink(m.getLink());
+			dto.setCategoryCode(m.getCategoryCode());
 			menus.add(dto);
 		});
 		

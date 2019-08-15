@@ -109,7 +109,8 @@ public class UserServiceImpl implements UserService {
             			        pri.getFlagAdd(), 
             			        pri.getFlagEdit(),
             			        pri.getFlagView(),
-            			        pri.getFlagDelete()).build();
+            			        pri.getFlagDelete(),
+            			        menu.getCategoryCode()).build();
             }).collect(Collectors.toList());	
 			Optional<UserLogin> userExist = userRepository.findById(login.getId());
 			//System.out.println("password : " + login.getPassword());

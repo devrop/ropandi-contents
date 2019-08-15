@@ -10,6 +10,8 @@ public class PrivilegeMenu {
 	@JsonProperty("menu_name")
 	private String menuName;
 	private String link;
+	@JsonProperty("category_menu")
+	private String categoryMenu;
 	private String privilege;
 	@JsonProperty("action_add")
 	private String actionAdd;
@@ -26,7 +28,7 @@ public class PrivilegeMenu {
 	
 	
 	public PrivilegeMenu(String idMenu, String idPrivilege, String menuName, String link, String privilege,
-			String actionAdd, String actionEdit, String actionView, String actionDelete) {
+			String actionAdd, String actionEdit, String actionView, String actionDelete, String categoryMenu) {
 		super();
 		this.idMenu = idMenu;
 		this.idPrivilege = idPrivilege;
@@ -37,6 +39,18 @@ public class PrivilegeMenu {
 		this.actionEdit = actionEdit;
 		this.actionView = actionView;
 		this.actionDelete = actionDelete;
+		this.categoryMenu = categoryMenu;
+	}
+
+	
+
+	public String getCategoryMenu() {
+		return categoryMenu;
+	}
+
+
+	public void setCategoryMenu(String categoryMenu) {
+		this.categoryMenu = categoryMenu;
 	}
 
 
@@ -96,7 +110,7 @@ public class PrivilegeMenu {
 	}
 	
 	public static PrivilegeMenu newPrivilegeMenu(String idMenu, String idPrivilege, String menuName, String link, String privilege,
-			String actionAdd, String actionEdit, String actionView, String actionDelete) {
+			String actionAdd, String actionEdit, String actionView, String actionDelete, String categoryMenu) {
 		PrivilegeMenu newPrivilegeMenu = new PrivilegeMenu();
 		newPrivilegeMenu.idMenu = idMenu;
 		newPrivilegeMenu.idPrivilege = idPrivilege;
@@ -107,11 +121,12 @@ public class PrivilegeMenu {
 		newPrivilegeMenu.actionEdit = actionEdit;
 		newPrivilegeMenu.actionView = actionView;
 		newPrivilegeMenu.actionDelete = actionDelete;
+		newPrivilegeMenu.categoryMenu = categoryMenu;
 		return newPrivilegeMenu;
 		
 	}
   public PrivilegeMenu build() {
-	  return new PrivilegeMenu(idMenu, idPrivilege, menuName, link, privilege, actionAdd, actionEdit, actionView, actionDelete);
+	  return new PrivilegeMenu(idMenu, idPrivilege, menuName, link, privilege, actionAdd, actionEdit, actionView, actionDelete, categoryMenu);
 	  
   }
 	

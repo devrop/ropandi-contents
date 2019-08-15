@@ -18,6 +18,8 @@ public class Menu {
 	private String menuName;
 	private String link;
 	private String status;
+	@JsonProperty("cetegory_code")
+	private String categoryCode;
 	@JsonProperty("created_date")
 	private LocalDateTime createdDate;
 	@JsonProperty("created_by")
@@ -38,7 +40,7 @@ public class Menu {
 	
 
 	public Menu(String idMenu, String menuName, String link, String status, LocalDateTime createdDate, String createdBy,
-			LocalDateTime updatedDate, String updatedBy) {
+			LocalDateTime updatedDate, String updatedBy, String categoryCode) {
 		super();
 		this.idMenu = idMenu;
 		this.menuName = menuName;
@@ -48,6 +50,23 @@ public class Menu {
 		this.createdBy = createdBy;
 		this.updatedDate = updatedDate;
 		this.updatedBy = updatedBy;
+		this.categoryCode = categoryCode;
+	}
+
+
+
+
+
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+
+
+
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 
@@ -151,7 +170,7 @@ public class Menu {
 
 
 	public static Menu newMenu(String idMenu, String menuName, String link, String status, LocalDateTime createdDate, String createdBy,
-			LocalDateTime updatedDate, String updatedBy) {
+			LocalDateTime updatedDate, String updatedBy, String categoryCode) {
 		Menu newMenu = new Menu();
 		newMenu.idMenu = idMenu;
 		newMenu.menuName = menuName;
@@ -161,11 +180,12 @@ public class Menu {
 		newMenu.createdBy = createdBy;
 		newMenu.updatedDate = updatedDate;
 		newMenu.updatedBy = updatedBy;
+		newMenu.categoryCode = categoryCode;
 		return newMenu;
 	}
 	
 	public Menu build() {
-		return new Menu(idMenu, menuName, link, status, createdDate, createdBy, updatedDate, updatedBy);
+		return new Menu(idMenu, menuName, link, status, createdDate, createdBy, updatedDate, updatedBy, categoryCode);
 	}
 }
 

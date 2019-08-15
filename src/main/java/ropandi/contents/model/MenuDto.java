@@ -10,7 +10,8 @@ public class MenuDto {
 	private String menuName;
 	@JsonProperty("link")
 	private String link;
-
+	@JsonProperty("cetegory_code")
+	private String categoryCode;
 	private String status;
 	@JsonProperty("created_date")
 	private String createdDate;
@@ -27,18 +28,39 @@ public class MenuDto {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public MenuDto(String idMenu, String menuName, String link, String status, String createdDate, String createdBy,
-			String updatedDate, String updatedBy) {
+	
+
+	
+	public MenuDto(String idMenu, String menuName, String link, String categoryCode, String status, String createdDate,
+			String createdBy, String updatedDate, String updatedBy) {
 		super();
 		this.idMenu = idMenu;
 		this.menuName = menuName;
 		this.link = link;
+		this.categoryCode = categoryCode;
 		this.status = status;
 		this.createdDate = createdDate;
 		this.createdBy = createdBy;
 		this.updatedDate = updatedDate;
 		this.updatedBy = updatedBy;
 	}
+
+
+
+
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+
+
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+
+
 
 	public String getIdMenu() {
 		return idMenu;
